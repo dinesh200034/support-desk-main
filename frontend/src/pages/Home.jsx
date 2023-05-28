@@ -1,20 +1,20 @@
 import { Link } from 'react-router-dom'
-import { FaQuestionCircle, FaTicketAlt } from 'react-icons/fa'
+import { FaTicketAlt, FaUpload } from 'react-icons/fa'
 
 function Home() {
   return (
     <>
       <section className='heading'>
-        <h1>What do you need help with?</h1>
-        <p>Please choose from an option below</p>
+        <h1>Check Your Marks</h1>
+        <p>Check choose an option below</p>
       </section>
 
       <Link to='/new-ticket' className='btn btn-reverse btn-block'>
-        <FaQuestionCircle /> Create New Ticket
+        <FaUpload /> Upload Files
       </Link>
 
       <Link to='/tickets' className='btn btn-block'>
-        <FaTicketAlt /> View My Tickets
+        <FaTicketAlt />View Documents 
       </Link>
     </>
   )

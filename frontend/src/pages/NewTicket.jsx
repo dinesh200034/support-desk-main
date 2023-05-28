@@ -32,7 +32,7 @@ function NewTicket() {
     <>
       <BackButton />
       <section className='heading'>
-        <h1>Create New Ticket</h1>
+        <h1>Upload New Documents</h1>
         <p>Please fill out the form below</p>
       </section>
 
@@ -47,21 +47,7 @@ function NewTicket() {
         </div>
         <form onSubmit={onSubmit}>
           <div className='form-group'>
-            <label htmlFor='product'>Product</label>
-            <select
-              name='product'
-              id='product'
-              value={product}
-              onChange={(e) => setProduct(e.target.value)}
-            >
-              <option value='iPhone'>iPhone</option>
-              <option value='Macbook Pro'>Macbook Pro</option>
-              <option value='iMac'>iMac</option>
-              <option value='iPad'>iPad</option>
-            </select>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='description'>Description of the issue</label>
+            <label htmlFor='description'>Description of Paper</label>
             <textarea
               name='description'
               id='description'
@@ -70,6 +56,14 @@ function NewTicket() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
+          </div>
+          <div className='form-group'>
+            <label htmlFor='paper'>Paper</label>
+            <input type='file' className='form-control'  />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='paper'>Marking Scheme</label>
+            <input type='file' className='form-control'  />
           </div>
           <div className='form-group'>
             <button className='btn btn-block'>Submit</button>
