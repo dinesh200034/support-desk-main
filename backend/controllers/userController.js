@@ -8,10 +8,10 @@ const User = require('../models/userModel')
 // @route   /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body
+  const { name, email, password, userType } = req.body
 
   // Validation
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !userType) {
     res.status(400)
     throw new Error('Please include all fields')
   }
@@ -33,6 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password: hashedPassword,
+    userType,
   })
 
   if (user) {
@@ -40,6 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      userType: user.userType,
       token: generateToken(user._id),
     })
   } else {
@@ -62,6 +64,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      userType: user.userType,
       token: generateToken(user._id),
     })
   } else {
@@ -78,6 +81,7 @@ const getMe = asyncHandler(async (req, res) => {
     id: req.user._id,
     email: req.user.email,
     name: req.user.name,
+    userType:user.userType,
   }
   res.status(200).json(user)
 })

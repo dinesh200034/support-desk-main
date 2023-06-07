@@ -20,6 +20,11 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    userType:{
+      type: String,
+      required: [true, 'Please add userType'],
+    },
+
   },
   {
     timestamps: true,

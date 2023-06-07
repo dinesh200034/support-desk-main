@@ -12,9 +12,11 @@ function Register() {
     email: '',
     password: '',
     password2: '',
+    userType: 'student',
+
   })
 
-  const { name, email, password, password2 } = formData
+  const { name, email, password, password2, userType } = formData
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -44,6 +46,7 @@ function Register() {
         name,
         email,
         password,
+        userType,
       }
 
       dispatch(register(userData))
@@ -122,6 +125,15 @@ function Register() {
               required
             />
           </div>
+
+          <div className='form-group'>
+            <label htmlFor="type">Select User Type:</label>
+            <select id="type" name="userType" value={userType} onChange={onChange}>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
+          </div>
+
           <div className='form-group'>
             <button className='btn btn-block'>Submit</button>
           </div>

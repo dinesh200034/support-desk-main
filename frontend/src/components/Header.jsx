@@ -12,7 +12,7 @@ function Header() {
     dispatch(logout())
     navigate('/')
   }
-
+  // console.log(user);
   return (
     <header className='header'>
       <div className='logo'>
@@ -20,11 +20,14 @@ function Header() {
       </div>
       <ul>
         {user ? (
-          <li>
-            <button className='btn' onClick={onLogout}>
-              <FaSignOutAlt /> Logout
-            </button>
-          </li>
+          <>
+            <li><label>{user.userType}</label></li>
+            <li>
+              <button className='btn' onClick={onLogout}>
+                <FaSignOutAlt /> Logout
+              </button>  
+            </li>
+          </>
         ) : (
           <>
             <li>
