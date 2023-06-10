@@ -36,23 +36,49 @@ const getTicket = asyncHandler(async (req, res) => {
 // @desc    Create new ticket
 // @route   POST /api/tickets
 // @access  Private
-const createTicket = asyncHandler(async (req, res) => {
-  const { product, description } = req.body
+// const createTicket = asyncHandler(async (req, res) => {
+//   const { paper,description } = req.body
 
-  if (!product || !description) {
-    res.status(400)
-    throw new Error('Please add a product and description')
+//   console.log("This is body", paper);
+//   console.log("This is body", description);
+
+//   if (!paper || !description) {
+//     res.status(400)
+//     throw new Error('Please add paper and description')
+//   }
+
+//   const ticket = await Ticket.create({
+//     paper,
+//     description,
+//     user: req.user.id,
+//     status: 'new',
+//   })
+
+//   res.status(201).json(ticket)
+// })
+const createTicket = async (req, res, next) => {
+  const { description } = req.body;
+  const paperFile = req.files['paper'][0];
+  const markingSchemeFile = req.files['markingScheme'][0];
+
+  try {
+    const ticket = new Ticket({
+      user: req.user._id,
+      description,
+      paper: paperFile.path,
+      markingScheme: markingSchemeFile.path,
+      status: 'new',
+    });
+
+    await ticket.save();
+
+    res.status(201).json(ticket);
+  } catch (error) {
+    next(error);
   }
+};
 
-  const ticket = await Ticket.create({
-    product,
-    description,
-    user: req.user.id,
-    status: 'new',
-  })
 
-  res.status(201).json(ticket)
-})
 
 // @desc    Delete ticket
 // @route   DELETE /api/tickets/:id

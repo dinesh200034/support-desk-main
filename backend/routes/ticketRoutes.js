@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+
+
 const {
   getTickets,
   getTicket,
@@ -9,12 +11,20 @@ const {
 } = require('../controllers/ticketController')
 
 const { protect } = require('../middleware/authMiddleware')
+const fileUpload = require('../middleware/fileUploadMiddleware');
+
 
 // Re-route into note router
 const noteRouter = require('./noteRoutes')
 router.use('/:ticketId/notes', noteRouter)
 
-router.route('/').get(protect, getTickets).post(protect, createTicket)
+// const upload = fileUpload.single('image');
+router
+  .route('/')
+  .get(protect, getTickets)
+  .post(protect, fileUpload.fields([{ name: 'paper', maxCount: 1 }, { name: 'markingScheme', maxCount: 1 }]), createTicket);
+
+
 
 router
   .route('/:id')

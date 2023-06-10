@@ -1,3 +1,4 @@
+const { text } = require('express')
 const mongoose = require('mongoose')
 
 const ticketSchema = mongoose.Schema(
@@ -7,14 +8,16 @@ const ticketSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    product: {
-      type: String,
-      required: [true, 'Please select a product'],
-      enum: ['iPhone', 'Macbook Pro', 'iMac', 'iPad'],
-    },
+
     description: {
       type: String,
       required: [true, 'Please enter a description of the issue'],
+    },
+    paper: {
+      type: String,
+    },
+    markingScheme: {
+      type: String,
     },
     status: {
       type: String,

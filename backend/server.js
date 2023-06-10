@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs');
 const express = require('express')
 require('colors')
 require('dotenv').config()
@@ -13,6 +14,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use('/uploads/images', express.static(path.join(__dirname, 'uploads/images')));
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'))

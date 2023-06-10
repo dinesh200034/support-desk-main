@@ -9,6 +9,8 @@ import { extractErrorMessage } from '../../utils'
 const initialState = {
   tickets: null,
   ticket: null,
+  error: null,
+  loading: false,
 }
 
 // Create new ticket
@@ -16,9 +18,11 @@ export const createTicket = createAsyncThunk(
   'tickets/create',
   async (ticketData, thunkAPI) => {
     try {
+      console.log("This is data", ticketData );
       const token = thunkAPI.getState().auth.user.token
       return await ticketService.createTicket(ticketData, token)
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(extractErrorMessage(error))
     }
   }
@@ -89,6 +93,19 @@ export const ticketSlice = createSlice({
           ticket._id === action.payload._id ? action.payload : ticket
         )
       })
+      .addCase(createTicket.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createTicket.fulfilled, (state, action) => {
+        state.ticket = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(createTicket.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 })
 

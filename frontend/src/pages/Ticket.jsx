@@ -96,6 +96,7 @@ function Ticket() {
         <div className='ticket-desc'>
           <h3>Description of Issue</h3>
           <p>{ticket.description}</p>
+          <p>{ticket.file}</p>
         </div>
         <h2>Notes</h2>
       </header>

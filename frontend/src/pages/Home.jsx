@@ -9,13 +9,18 @@ function Home() {
     <>
       <section className='heading'>
         <h1>Check Your Marks</h1>
-        <p>Check choose an option below</p>
+        <p>Choose an option below</p>
       </section>
 
-      {user && user.userType === 'teacher' && 
+      {user && user.userType === 'teacher'? 
         <Link to='/new-ticket' className='btn btn-reverse btn-block'>
           <FaUpload /> Upload Files
         </Link>
+        :
+        !user &&
+        <Link to='/new-ticket' className='btn btn-reverse btn-block'>
+          <FaUpload /> Upload Files
+        </Link>     
     
     }
 
