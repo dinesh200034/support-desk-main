@@ -36,6 +36,9 @@ function NewTicket() {
     formData.append('paper', paperFile);
     formData.append('markingScheme', markingSchemeFile);
     formData.append('description', description);
+    formData.append('paperName', paperFile.name); // Add this line
+    formData.append('markingSchemeName', markingSchemeFile.name); // Add this line
+
   
     dispatch(createTicket(formData))
       .unwrap()

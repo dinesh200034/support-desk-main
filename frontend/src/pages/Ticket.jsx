@@ -29,14 +29,12 @@ function Ticket() {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [noteText, setNoteText] = useState('')
   const { ticket } = useSelector((state) => state.tickets)
-
   const { notes } = useSelector((state) => state.notes)
 
-  // NOTE: no need for two useParams
-  // const params = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { ticketId } = useParams()
+
 
   useEffect(() => {
     dispatch(getTicket(ticketId)).unwrap().catch(toast.error)
@@ -83,7 +81,7 @@ function Ticket() {
       <header className='ticket-header'>
         <BackButton />
         <h2>
-          Ticket ID: {ticket._id}
+          Paper ID: {ticket._id}
           <span className={`status status-${ticket.status}`}>
             {ticket.status}
           </span>
@@ -91,12 +89,31 @@ function Ticket() {
         <h3>
           Date Submitted: {new Date(ticket.createdAt).toLocaleString('en-US')}
         </h3>
-        <h3>Product: {ticket.product}</h3>
+        
         <hr />
         <div className='ticket-desc'>
-          <h3>Description of Issue</h3>
+          <h3>Description of Paper</h3>
           <p>{ticket.description}</p>
-          <p>{ticket.file}</p>
+
+          <section className='files'>
+            <h2>Files</h2>
+            <div className='file-preview'>
+              <p>
+                {ticket.paper && (
+                  <a href={ticket.paper} target='_blank' rel='noopener noreferrer'>
+                    View Paper
+                  </a>
+                )} 
+              </p>
+              <p>
+                {ticket.markingScheme && (
+                  <a href={ticket.markingScheme} target='_blank' rel='noopener noreferrer'>
+                    View Marking Scheme
+                  </a>
+                )}
+              </p>
+            </div>
+          </section>
         </div>
         <h2>Notes</h2>
       </header>
@@ -144,7 +161,7 @@ function Ticket() {
 
       {ticket.status !== 'closed' && (
         <button onClick={onTicketClose} className='btn btn-block btn-danger'>
-          Close Ticket
+          Close Paper
         </button>
       )}
     </div>

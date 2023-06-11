@@ -30,7 +30,7 @@ function Tickets() {
       <div className='tickets'>
         <div className='ticket-headings'>
           <div>Date</div>
-          <div>Paper</div>
+          <div>Subject</div>
           <div>Status</div>
           <div></div>
         </div>

@@ -6,7 +6,10 @@ function TicketItem({ ticket }) {
       <div>{new Date(ticket.createdAt).toLocaleString('en-US')}</div>
       <div>{ticket.product}</div>
       <div className={`status status-${ticket.status}`}>{ticket.status}</div>
-      <Link to={`/ticket/${ticket._id}`} className='btn btn-reverse btn-sm'>
+      <Link to={{
+        pathname: `/ticket/${ticket._id}`,
+        search: `?paperUrl=${encodeURIComponent(ticket.paper)}&markingSchemeUrl=${encodeURIComponent(ticket.markingScheme)}`,
+      }} className='btn btn-reverse btn-sm'>
         View
       </Link>
     </div>
@@ -14,3 +17,5 @@ function TicketItem({ ticket }) {
 }
 
 export default TicketItem
+
+

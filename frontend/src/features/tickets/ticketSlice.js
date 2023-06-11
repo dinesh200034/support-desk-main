@@ -20,7 +20,16 @@ export const createTicket = createAsyncThunk(
     try {
       console.log("This is data", ticketData );
       const token = thunkAPI.getState().auth.user.token
-      return await ticketService.createTicket(ticketData, token)
+      const response = await ticketService.createTicket(ticketData, token);
+
+      response.paper = `${response.paper.replace(/\\/g, '/')}`;
+      response.markingScheme = `${response.markingScheme.replace(/\\/g, '/')}`;
+      
+      // console.log(response.paper, response.markingScheme);
+      
+
+      return response;
+
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(extractErrorMessage(error))
@@ -47,7 +56,18 @@ export const getTicket = createAsyncThunk(
   async (ticketId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await ticketService.getTicket(ticketId, token)
+      // return await ticketService.getTicket(ticketId, token)
+
+      const response = await ticketService.getTicket(ticketId, token);
+
+      // Update the response data to include the file URLs
+      // console.log(window.location.origin) = 'http://localhost:3000'
+      response.paper = `${response.paper.replace(/\\/g, '/')}`;
+      response.markingScheme = `${response.markingScheme.replace(/\\/g, '/')}`;
+      
+
+      return response;
+
     } catch (error) {
       return thunkAPI.rejectWithValue(extractErrorMessage(error))
     }
