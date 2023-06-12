@@ -14,7 +14,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use('/uploads/images', express.static(path.join(__dirname, 'uploads/images')));
+app.use('/uploads/pdf', express.static(path.join(__dirname, 'uploads/pdf')));
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'))
