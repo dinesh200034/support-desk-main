@@ -2,9 +2,13 @@ const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema(
   {
-    name: {
+    firstName: {
       type: String,
-      required: [true, 'Please add a name'],
+      required: [true, 'Please add first name'],
+    },
+    lastName: {
+      type: String,
+      required: [true, 'Please add last name'],
     },
     email: {
       type: String,
@@ -15,9 +19,19 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please add a password'],
     },
-    isAdmin: {
+    userType: {
+      type: String,
+      // required: [true, 'Please add a user type'],
+      // unique: true,
+      default: 'student',
+
+    },
+    emailActive: {
       type: Boolean,
-      required: true,
+      default: false,
+    },
+    isDeleted: {
+      type: Boolean,
       default: false,
     },
   },

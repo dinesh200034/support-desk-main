@@ -1,57 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import Header from './components/Header'
-import PrivateRoute from './components/PrivateRoute'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import NewTicket from './pages/NewTicket'
-import Tickets from './pages/Tickets'
-import Ticket from './pages/Ticket'
+import { Route, Routes } from 'react-router-dom';
+import TopBar from "./Components/TopBar";
+import QuestionsPage from "./Pages/QuestionsPage";
+import EssayPage from './Pages/EssayPage';
+import McqPage from './Pages/McqPage';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import Dashboard from './Pages/Dashboard';
+import './Components/TopBar.css';
 
-// NOTE: Here we have removed the nested routing as the path is the same
-
-function App() {
-  return (
-    <>
-      <Router>
-        <div className='container'>
-          <Header />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route
-              path='/new-ticket'
-              element={
-                <PrivateRoute>
-                  <NewTicket />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path='/tickets'
-              element={
-                <PrivateRoute>
-                  <Tickets />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path='/ticket/:ticketId'
-              element={
-                <PrivateRoute>
-                  <Ticket />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </div>
-      </Router>
-      <ToastContainer />
-    </>
-  )
+function App(){
+  return(
+    <div className='h-full'>
+      {/* <TopBar /> */}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/essayPage" element={<EssayPage />} />
+        <Route path="/mcq" element={<Dashboard />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,103 +1,81 @@
-import { useState } from 'react'
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import { FaSignInAlt } from 'react-icons/fa'
-import { useSelector, useDispatch } from 'react-redux'
-import { login } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
+import React,{useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FcGoogle } from "react-icons/fc";
+import Logo from '../photos/loginLogo.png'
+import InputField from '../Components/InputField';
+import SubmitButton from '../Components/SubmitButton';
+import classnames from 'classnames';
+import axios from 'axios';
+function Login(){
+    const navigate = useNavigate();
 
-function Login() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
+    const classes= classnames('rounded shadow shadow-gray-400 w-full h-9 p-2 mb-4');
 
-  const { email, password } = formData
-
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const { isLoading } = useSelector((state) => state.auth)
-
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }))
-  }
-
-  // NOTE: no need for useEffect here as we can catch the
-  // AsyncThunkAction rejection in our onSubmit or redirect them on the
-  // resolution
-  // Side effects shoulld go in event handlers where possible
-  // source: - https://beta.reactjs.org/learn/keeping-components-pure#where-you-can-cause-side-effects
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-
-    const userData = {
-      email,
-      password,
+    const handleClick=()=>{
+        alert("clicked");
     }
 
-    dispatch(login(userData))
-      .unwrap()
-      .then((user) => {
-        // NOTE: by unwrapping the AsyncThunkAction we can navigate the user after
-        // getting a good response from our API or catch the AsyncThunkAction
-        // rejection to show an error message
-        toast.success(`Logged in as ${user.name}`)
-        navigate('/')
-      })
-      .catch(toast.error)
-  }
+    const [formData , setFormData] = useState({
+        email: '',
+        password: '',
+    });
 
-  if (isLoading) {
-    return <Spinner />
-  }
+    const { email, password } = formData;
 
-  return (
-    <>
-      <section className='heading'>
-        <h1>
-          <FaSignInAlt /> Login
-        </h1>
-        <p>Please log in to get support</p>
-      </section>
+    const [error, setError] = useState();
 
-      <section className='form'>
-        <form onSubmit={onSubmit}>
-          <div className='form-group'>
-            <input
-              type='email'
-              className='form-control'
-              id='email'
-              name='email'
-              value={email}
-              onChange={onChange}
-              placeholder='Enter your email'
-              required
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              type='password'
-              className='form-control'
-              id='password'
-              name='password'
-              value={password}
-              onChange={onChange}
-              placeholder='Enter password'
-              required
-            />
-          </div>
-          <div className='form-group'>
-            <button className='btn btn-block'>Submit</button>
-          </div>
-        </form>
-      </section>
-    </>
-  )
+    const onChange =(event) =>{
+        setFormData((prevState)=>({
+            ...prevState,
+            [event.target.name]: event.target.value
+        }))
+    }
+
+    const handleSubmit = async (event)=>{
+        event.preventDefault();
+        console.log(formData);
+        try{
+            const response = await axios.post('http://localhost:5000/api/users/login',formData);
+            console.log(response.data);
+            localStorage.setItem('token', JSON.stringify(response.data));
+            // const allItems=JSON.parse(localStorage.getItem('token'));
+            // console.log(allItems['_id']);
+            navigate('/dashboard');
+        }catch(error){
+            console.log("error:"+error.response.data.message);
+            if(error.response && error.response.status >=400 && error.response.status <500){
+                console.log(error.response.data.message);
+                setError(error.response.data.message);
+            }
+        }
+    }
+
+
+    return (
+        <div className="flex justify-center items-center h-full">
+            <div className="flex flex-col items-center rounded rounded-sm shadow shadow-gray-400 w-96 h-fit py-10 px-10">
+                <div className="w-5/12 mb-10 mt-10"><img src={Logo} alt="Logo"/></div>
+                <div className="flex items-center  rounded rounded-sm w-3/4 shadow shadow-gray-300">
+                    <button className="flex items-center justify-center p-1" onClick={handleClick}><FcGoogle className=" text-xl mx-3.5"/>
+                    Continue with Google</button>
+                </div>
+                <div className="w-full my-5" style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ flex: '1', borderTop: '1px solid black' }}></div>
+                  <span style={{ margin: '0 10px' }}>or</span>
+                  <div style={{ flex: '1', borderTop: '1px solid black' }}></div>
+                </div>
+                <div className="w-full">
+                    <form className="flex flex-col items-center justify-center w-full" onSubmit={handleSubmit}>
+                        {error && <div className="bg-red-500 text-white text-sm mb-2 w-full p-2 rounded text-center mb-6">{error}</div>}
+                        <input className={classes} name="email" type="email" value={email} placeholder="E-mail address" onChange={onChange}/>
+                        <input className={classes} name="password" type="password" value={password} placeholder="Confirm password" onChange={onChange}/>
+                        <SubmitButton type="submit">Continue</SubmitButton>
+                    </form>
+                </div>
+                <div className="text-sm text-slate-500 mt-7">Don't have an account?</div>
+                <div className="text-sm text-cyan-600 mt-2"><Link to="/register">Create account</Link></div>
+            </div>
+        </div>
+    )
 }
-
-export default Login
+export default Login;
