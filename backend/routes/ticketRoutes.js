@@ -19,12 +19,22 @@ const noteRouter = require('./noteRoutes')
 router.use('/:ticketId/notes', noteRouter)
 
 // const upload = fileUpload.single('image');
+
+// router
+//   .route('/')
+//   .get(protect, getTickets)
+//   .post(protect, createTicket);
 router
   .route('/')
   .get(protect, getTickets)
-  .post(protect, fileUpload.fields([{ name: 'paper', maxCount: 1 }, { name: 'markingScheme', maxCount: 1 }]), createTicket);
-
-
+  .post(
+    protect,
+    fileUpload.fields([
+      { name: 'paper', maxCount: 1 },
+      { name: 'markingScheme', maxCount: 1 }
+    ]),
+    createTicket
+  );
 
 router
   .route('/:id')

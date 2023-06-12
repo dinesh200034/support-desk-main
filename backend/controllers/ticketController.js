@@ -1,4 +1,7 @@
-const asyncHandler = require('express-async-handler')
+const asyncHandler = require('express-async-handler');
+const convertPdfToImages = require('../middleware/convertPdfToImagesMiddleware');
+const { uploadFileToFirebase } = require('../config/firebase');
+
 const path = require('path');
 
 const Ticket = require('../models/ticketModel')
@@ -56,29 +59,36 @@ const createTicket = asyncHandler(async (req, res) => {
   const paperFile = req.files['paper'][0];
   const markingSchemeFile = req.files['markingScheme'][0];
 
-    if (!paperFile || !description || !markingSchemeFile) {
-    res.status(400)
-    throw new Error('Please add documents(pdf) and description')
+  if (!paperFile || !description || !markingSchemeFile) {
+    res.status(400);
+    throw new Error('Please add documents (pdf) and description');
   }
+  // console.log("This is file paths",paperFile.path);
+  // console.log("This is file paths", markingSchemeFile.path);
 
-  
   try {
+    const paperDownloadURL = await uploadFileToFirebase(paperFile);
+    const markingSchemeDownloadURL = await uploadFileToFirebase(markingSchemeFile);
+
+    // console.log("Files uploaded successfully");
+
+
     const ticket = new Ticket({
       user: req.user._id,
       description,
-      paper: paperFile.path,
-      markingScheme: markingSchemeFile.path,
+      paper: paperDownloadURL,
+      markingScheme: markingSchemeDownloadURL,
       status: 'new',
     });
 
     await ticket.save();
 
     res.status(201).json(ticket);
+
   } catch (error) {
-    throw new Error(error)
+    throw new Error(error);
   }
 });
-
 
 // @desc    Delete ticket
 // @route   DELETE /api/tickets/:id
