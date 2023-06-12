@@ -1,5 +1,6 @@
 import NavBar from '../Components/NavBar'
 import SideBar from '../Components/SideBar'
+import Subjects from '../Components/Subjects'
 import {useState} from 'react'
 function Dashboard() {
 
@@ -19,6 +20,7 @@ function Dashboard() {
     <div>
       <NavBar black onClickFunc={handleClick}/>
       <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked}/>
+      <Subjects clicked={isClicked}/>
     </div>
   )
 }

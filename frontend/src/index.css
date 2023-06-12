@@ -26,6 +26,7 @@ code {
 .sidebar{
   height: calc(100vh - 56px);
 }
+
 .outer{
   position: absolute;
   /* left: -500px; */
