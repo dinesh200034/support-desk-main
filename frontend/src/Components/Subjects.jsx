@@ -1,8 +1,12 @@
 import classnames from 'classnames';
 import SubjectBox from './SubjectBox';
-function Subjects({clicked}) {
-  const classes = classnames('sidebar border border-red-900 static max-sm:ml-16');
-  console.log(typeof(clicked))
+import {Link} from 'react-router-dom';
+function Subjects({clicked,data}) {
+  const classes = classnames('sidebar static max-sm:ml-16');
+  const subjects = data.map((subject,index)=>{
+    return <Link key={index} to={"/subject/"+subject.id}><SubjectBox key={index} subjectName={subject.name}/></Link>
+  })
+
   return (
     <div className={`${classes} ${clicked === 'outer' ? 'ml-16 outer' : 'ml-52 inner'}`}>
       <div className='flex justify-center items-center sidebar'>
@@ -11,45 +15,9 @@ function Subjects({clicked}) {
                 <p className='bg-black/20 p-2 rounded rounded-lg'>Acdemic year</p>
                 <p className='bg-black/20 p-2 rounded rounded-lg'>Grade</p>
             </div>
+            
             <div className='h-custom-94% py-2 flex flex-wrap overflow-auto'>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
-                <SubjectBox subjectName='SCS2203-Data Structures and Algorithms 2023'/>
+              {subjects}
             </div>
           </div>
       </div>
