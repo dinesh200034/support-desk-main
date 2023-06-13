@@ -4,7 +4,8 @@ import {Link} from 'react-router-dom';
 function Subjects({clicked,data}) {
   const classes = classnames('sidebar static max-sm:ml-16');
   const subjects = data.map((subject,index)=>{
-    return <Link key={index} to={"/subject/"+subject.id}><SubjectBox key={index} subjectName={subject.name}/></Link>
+    // console.log(subject);
+    return <Link key={index} to={"/subject/"+subject._id}><SubjectBox key={index} subjectCode={subject.subjectCode} subjectName={subject.subjectName} year={subject.year}/></Link>
   })
 
   return (

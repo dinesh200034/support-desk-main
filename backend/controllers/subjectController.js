@@ -9,14 +9,14 @@ const Subject = require('../models/subjectModel')
 // @route   GET /api/subjects/:id
 // @access  Private
 const getsubjects = asyncHandler(async (req, res) => {
-    console.log(req)
-  const subjects = await Subject.find({ lectureId: req.user_id })
+    console.log("Hi"+req.params.id)
+  const subjects = await Subject.find({ lectureId: req.params.id })
 
     if (!subjects) {
         res.status(404)
     throw new Error('Subjects not found')
   }
-
+  console.log(subjects)
   res.status(200).json(subjects)
 })
 

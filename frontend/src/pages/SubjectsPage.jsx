@@ -9,13 +9,18 @@ function SubjectsPage() {
   const [isClicked,setClick] = useState("outer");
   const [subjects,setSubjects] = useState([]);
 
-  useEffecr(()=>{
+  useEffect(()=>{
     fetchSubjects();
   },[]);
 
   const fetchSubjects = async () =>{
     try{
-      const response = await axios.get(`http://localhost:5000/api/subjects:${user_id}`);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${allItems['token']}`,
+        },
+      }
+      const response = await axios.get(`http://localhost:5000/api/subjects/${user_id}`,config);
       const data = response.data;
       setSubjects(data);
     }catch(error){
@@ -23,11 +28,11 @@ function SubjectsPage() {
     }
   }
 
-  const data = [
-    { id: 1, name: 'John' },
-    { id: 2, name: 'Jane' },
-    { id: 3, name: 'Bob' },
-  ];
+  // const data = [
+  //   { id: 1, name: 'John' },
+  //   { id: 2, name: 'Jane' },
+  //   { id: 3, name: 'Bob' },
+  // ];
   //Function to handle the click of the hamburger menu
   const handleClick = () => {
     if(isClicked==="outer"){
@@ -42,7 +47,7 @@ function SubjectsPage() {
     <div>
       <NavBar black onClickFunc={handleClick}/>
       <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked}/>
-      <Subjects clicked={isClicked} data={data}/>
+      <Subjects clicked={isClicked} data={subjects}/>
     </div>
   )
 }

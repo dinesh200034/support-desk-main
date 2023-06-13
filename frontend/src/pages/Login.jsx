@@ -40,7 +40,7 @@ function Login(){
             localStorage.setItem('token', JSON.stringify(response.data));
             // const allItems=JSON.parse(localStorage.getItem('token'));
             // console.log(allItems['_id']);
-            navigate('/dashboard');
+            navigate('/subjects');
         }catch(error){
             console.log("error:"+error.response.data.message);
             if(error.response && error.response.status >=400 && error.response.status <500){
