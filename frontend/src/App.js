@@ -1,8 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import TopBar from "./Components/TopBar";
-import QuestionsPage from "./Pages/QuestionsPage";
 import EssayPage from './Pages/EssayPage';
-import McqPage from './Pages/McqPage';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
