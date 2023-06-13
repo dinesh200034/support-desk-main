@@ -3,17 +3,27 @@ const mongoose = require('mongoose')
 
 const answerSchema = mongoose.Schema(
   {
-    paperNo: {
-      type: String,
-      required: [true, 'Please add the Paper No'],
-    },
-    questionNo: {
+    pointNo: {
       type: Number,
-      required:[true, 'Please add the Question No']
     },
-    text: {
-      type: String,
+    questionNO: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'QuestionAnswer',
     },
+    text:{
+        type:String,
+    },
+    OCR_accuracy:{
+        type:Number,
+    },
+    OMR_accuracy:{
+        type:Number,
+    },
+    marks:{
+      type:Number,
+    },
+
 
   },
   {
