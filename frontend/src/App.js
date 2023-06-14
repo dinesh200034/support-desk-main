@@ -5,6 +5,9 @@ import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
 import SubjectsPage from './Pages/SubjectsPage';
 import SubjectPage from './Pages/SubjectPage';
+import YearsPage from './Pages/YearsPage';
+import MarkingSchemesPage from './Pages/MarkingSchemesPage';
+import AnswerSheetsPage from './Pages/AnswerSheetsPage';
 import './Components/TopBar.css';
 
 function App(){
@@ -17,8 +20,20 @@ function App(){
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/essayPage" element={<EssayPage />} />
+
         <Route path="/subjects" element={<SubjectsPage />} />
-        <Route path="/subject/:subjectId" element={<SubjectPage />} />
+        <Route path="/subjects/:subjectId" element={<SubjectPage />} />
+
+        <Route path="/markingschemes/years/:subjectCode" element={<YearsPage />} />
+        <Route path="/answersheets/years/:subjectCode" element={<YearsPage />} />
+
+        <Route path="/markingschemes/:year/:subjectId" element={<MarkingSchemesPage />} />
+        <Route path="/markingschemes" element={<SubjectsPage />} />
+
+        <Route path="/answersheets/:year/:subjectId" element={<AnswerSheetsPage />} />
+        <Route path="/answersheets" element={<SubjectsPage />} />
+
+        
         <Route path="/mcq" element={<Dashboard />} />
       </Routes>
     </div>

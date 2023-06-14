@@ -7,22 +7,58 @@ const Subject = require('../models/subjectModel')
 
 // @desc    Get user subjects
 // @route   GET /api/subjects/:id
-// @access  Private
+// @arrayess  Private
 const getsubjects = asyncHandler(async (req, res) => {
-    console.log("Hi"+req.params.id)
+    // console.log("Hi"+req.params.id)
   const subjects = await Subject.find({ lectureId: req.params.id })
 
     if (!subjects) {
         res.status(404)
     throw new Error('Subjects not found')
   }
+
+  const subs=[]
+
+  const groupedSubjects = subjects.reduce((accumulator, subject) => {
+    const subjectCode = subject.subjectCode;
+    if (!accumulator.includes(subjectCode)) {
+      accumulator.push(subjectCode);
+      subs.push(subject)
+    }
+    return accumulator;
+  }, []);
+
+  res.status(200).json(subs)
+})
+
+
+const getSubjectsYears = asyncHandler(async (req, res) => {
+  const subs=[]
+  // console.log("Hi"+req.params.subject_id)
+  // console.log("User_ID:"+req.params.user_id)
+  console.log("SubjectCode:"+req.params.subjectcode)
+  const subjects = await Subject.find({ lectureId: req.params.user_id ,subjectCode:req.params.subjectcode})
+  if (!subjects) {
+    res.status(404)
+    throw new Error('Subjects not found')
+  }
   console.log(subjects)
-  res.status(200).json(subjects)
+
+  const groupedSubjects = subjects.reduce((accumulator, subject) => {
+    const subjectYear = subject.year;
+    if (!accumulator.includes(subjectYear)) {
+      accumulator.push(subjectYear);
+      // console.log(accumulator)
+      subs.push(subject)
+    }
+    return accumulator;
+  }, []);
+  res.status(200).json(subs)
 })
 
 // // @desc    Get user ticket
 // // @route   GET /api/tickets/:id
-// // @access  Private
+// // @arrayess  Private
 // const getTicket = asyncHandler(async (req, res) => {
 //   const ticket = await Ticket.findById(req.params.id)
 
@@ -41,5 +77,5 @@ const getsubjects = asyncHandler(async (req, res) => {
 
 
 module.exports = {
-  getsubjects,
+  getsubjects,getSubjectsYears
 }

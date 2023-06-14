@@ -11,7 +11,7 @@ function SideBar({subjects,markingSchemes,answerPapers,mcq,clicked}) {
   const pathName = location.pathname.split('/').filter((path) => path !== '')
   const [isClicked,setClick] = useState(false)
 
-  const classes = classnames('flex flex-col pl- justify-center cursor-pointer py-3 hover:bg-white hover:bg-opacity-30 rounded rounded-lg');
+  const classes = classnames('flex flex-col pl-1 justify-center cursor-pointer py-3 hover:bg-white hover:bg-opacity-30 rounded rounded-lg my-2');
   const bottomclasses = classnames('flex flex-col items-center justify-center cursor-pointer py-4');
   const backGroundColor = classnames('bg-white bg-opacity-30 rounded rounded-lg');
   let navbarclasses;
@@ -19,7 +19,7 @@ function SideBar({subjects,markingSchemes,answerPapers,mcq,clicked}) {
   if(clicked==="outer"){
     navbarclasses = classnames('px-2 text-white font-bold text-center flex flex-col justify-between sidebar w-16 bg-[#4457FF] outer pt-1')
   }else if(clicked==="inner"){
-    navbarclasses = classnames('px-2 text-white font-bold text-center flex flex-col justify-between sidebar w-52 bg-[#4457FF] inner pt-1 max-sm:w-14')
+    navbarclasses = classnames('px-2 text-white font-bold text-center flex flex-col justify-between sidebar w-64 bg-[#4457FF] inner pt-1 max-sm:w-14')
   }
 
   //When logout button clicked
@@ -32,8 +32,8 @@ function SideBar({subjects,markingSchemes,answerPapers,mcq,clicked}) {
     <div className={navbarclasses}>
       <div className="text-left">
         {subjects && <div className={`${classes} ${clicked === "outer" ? 'items-center': ""} ${pathName[0] === "subjects" ? backGroundColor : ""}`}><Link to="/subjects" className='flex items-center'><div className='ml-1 block text-3xl pr-1'><MdSubject/></div>{clicked==="inner" ? <div className='ml-1 max-sm:hidden'>Subjects</div> : ""}</Link></div>}
-        {markingSchemes && <div className={`${classes} ${clicked === 'outer' ? 'items-center': ""} ${pathName[0] === "markingSchemes" ? backGroundColor : ""}`}><Link to="/markingschemes" className='flex items-center'><div className='ml-1 block text-3xl pr-1'><BsFillBookFill/></div>{clicked==="inner" ? <div className='ml-1 max-sm:hidden'>Marking Schemes</div> : ""}</Link></div>}
-        {answerPapers && <div className={`${classes} ${clicked === 'outer' ? 'items-center': ""} ${pathName[0] === "answerPapers" ? backGroundColor : ""}`}><Link to="/answerpapers" className='flex items-center'><div className='ml-1 block text-3xl pr-1'><BiAlarmOff/></div>{clicked==="inner" ?  <div className='ml-1 max-sm:hidden'>Answer Papers</div> : ""}</Link></div>}
+        {markingSchemes && <div className={`${classes} ${clicked === 'outer' ? 'items-center': ""} ${pathName[0] === "markingschemes" ? backGroundColor : ""}`}><Link to="/markingschemes" className='flex items-center'><div className='ml-1 block text-3xl pr-1'><BsFillBookFill/></div>{clicked==="inner" ? <div className='ml-1 max-sm:hidden'>Marking Schemes</div> : ""}</Link></div>}
+        {answerPapers && <div className={`${classes} ${clicked === 'outer' ? 'items-center': ""} ${pathName[0] === "answersheets" ? backGroundColor : ""}`}><Link to="/answersheets" className='flex items-center'><div className='ml-1 block text-3xl pr-1'><BiAlarmOff/></div>{clicked==="inner" ?  <div className='ml-1 max-sm:hidden'>Answer Papers</div> : ""}</Link></div>}
         {mcq && <div className={`${classes} ${clicked === 'outer' ? 'items-center': ""} ${pathName[0] === "mcq" ? backGroundColor : ""}`}><Link to="/mcq" className='flex items-center'><div className='ml-1 block text-3xl pr-1'><BsBookmarksFill/></div>{clicked==="inner" ? <div className='ml-1 max-sm:hidden'>MCQ</div> : ""}</Link></div>}
       </div>
       <div className={bottomclasses}>

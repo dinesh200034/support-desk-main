@@ -1,33 +1,36 @@
 import NavBar from '../Components/NavBar'
 import SideBar from '../Components/SideBar'
-import Subjects from '../Components/Subjects/Subjects'
+import Years from '../Components/Years'
+
+import { useParams, useNavigate } from 'react-router-dom'
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-function SubjectsPage() {
+function YearsPage() {
+  const { subjectCode } = useParams()
   const allItems=JSON.parse(localStorage.getItem('token'));
   const user_id=allItems['_id'];
   const [isClicked,setClick] = useState("outer");
-  const [subjects,setSubjects] = useState([]);
+  const [years,setYears] = useState([]);
 
   useEffect(()=>{
-    fetchSubjects();
+    fetchYears();
   },[]);
 
-  const fetchSubjects = async () =>{
+  const fetchYears = async () =>{
     try{
       const config = {
         headers: {
           Authorization: `Bearer ${allItems['token']}`,
         },
       }
-      //****Methana subjects code eken group karaganna oona
-      const response = await axios.get(`http://localhost:5000/api/subjects/${user_id}`,config);
+      const response = await axios.get(`http://localhost:5000/api/subjects/years/${user_id}/${subjectCode}`,config);
       const data = response.data;
-      setSubjects(data);
+      setYears(data);
     }catch(error){
       console.log(error);
     }
   }
+
   //Function to handle the click of the hamburger menu
   const handleClick = () => {
     if(isClicked==="outer"){
@@ -42,9 +45,9 @@ function SubjectsPage() {
     <div>
       <NavBar black onClickFunc={handleClick}/>
       <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked}/>
-      <Subjects clicked={isClicked} data={subjects}/>
+      <Years clicked={isClicked} data={years}/>
     </div>
   )
 }
 
-export default SubjectsPage
+export default YearsPage
