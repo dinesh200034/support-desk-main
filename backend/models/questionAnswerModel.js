@@ -8,6 +8,11 @@ const questionAnswerSchema = mongoose.Schema(
       required: true,
       ref: 'Paper',
     },
+    subjectId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Subject',
+    },
     questionNo: {
       type: String,
       required: [true, 'Please add the Question No'],

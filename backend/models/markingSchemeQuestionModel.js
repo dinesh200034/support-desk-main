@@ -8,6 +8,11 @@ const markingSchemeQuestionSchema = mongoose.Schema(
         required: true,
         ref: 'MarkingScheme',
     },
+    subjectId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Subject',
+    },
     questionNumber: {
       type: Number,
     },

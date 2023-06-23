@@ -41,7 +41,7 @@ function SubjectsPage() {
   return (
     <div>
       <NavBar black onClickFunc={handleClick}/>
-      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked}/>
+      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked} onClickFunc={handleClick}/>
       <Subjects clicked={isClicked} data={subjects}/>
     </div>
   )

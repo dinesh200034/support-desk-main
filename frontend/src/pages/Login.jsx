@@ -33,18 +33,18 @@ function Login(){
 
     const handleSubmit = async (event)=>{
         event.preventDefault();
-        console.log(formData);
+        // console.log(formData);
         try{
             const response = await axios.post('http://localhost:5000/api/users/login',formData);
-            console.log(response.data);
+            // console.log(response.data);
             localStorage.setItem('token', JSON.stringify(response.data));
             // const allItems=JSON.parse(localStorage.getItem('token'));
             // console.log(allItems['_id']);
             navigate('/subjects');
         }catch(error){
-            console.log("error:"+error.response.data.message);
+            // console.log("error:"+error.response.data.message);
             if(error.response && error.response.status >=400 && error.response.status <500){
-                console.log(error.response.data.message);
+                // console.log(error.response.data.message);
                 setError(error.response.data.message);
             }
         }

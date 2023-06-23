@@ -1,6 +1,6 @@
 import NavBar from '../Components/NavBar'
 import SideBar from '../Components/SideBar'
-import MarkingSchemes from '../Components/MarkingSchemes/MarkingSchemes'
+import AnswerSheets from '../Components/AnswerSheets/AnswerSheets'
 import {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import axios from 'axios'
@@ -42,9 +42,9 @@ function AnswerSheetsPage() {
 
   return (
     <div>
-      <NavBar black onClickFunc={handleClick}/>
-      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked}/>
-      <MarkingSchemes clicked={isClicked} data="hello"/>
+      <NavBar />
+      <SideBar mcq subjects markingSchemes answerPapers onClickFunc={handleClick} clicked={isClicked}/>
+      <AnswerSheets clicked={isClicked} data="hello"/>
       
     </div>
   )

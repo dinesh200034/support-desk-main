@@ -23,15 +23,17 @@ function App(){
 
         <Route path="/subjects" element={<SubjectsPage />} />
         <Route path="/subjects/:subjectId" element={<SubjectPage />} />
+        <Route path="/subjects/years/:subjectCode" element={<YearsPage />} />
+        <Route path="/subjects/:year/:subjectId" element={<MarkingSchemesPage />} />
 
-        <Route path="/markingschemes/years/:subjectCode" element={<YearsPage />} />
-        <Route path="/answersheets/years/:subjectCode" element={<YearsPage />} />
 
-        <Route path="/markingschemes/:year/:subjectId" element={<MarkingSchemesPage />} />
         <Route path="/markingschemes" element={<SubjectsPage />} />
+        <Route path="/markingschemes/years/:subjectCode" element={<YearsPage />} />
+        <Route path="/markingschemes/:year/:subjectId" element={<MarkingSchemesPage />} />
 
-        <Route path="/answersheets/:year/:subjectId" element={<AnswerSheetsPage />} />
         <Route path="/answersheets" element={<SubjectsPage />} />
+        <Route path="/answersheets/years/:subjectCode" element={<YearsPage />} />
+        <Route path="/answersheets/:year/:subjectId" element={<AnswerSheetsPage />} />
 
         
         <Route path="/mcq" element={<Dashboard />} />

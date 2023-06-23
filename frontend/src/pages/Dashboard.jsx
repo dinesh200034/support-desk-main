@@ -19,8 +19,8 @@ function Dashboard() {
 
   return (
     <div>
-      <NavBar black onClickFunc={handleClick}/>
-      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked}/>
+      <NavBar />
+      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked} onClickFunc={handleClick}/>
       <Subjects clicked={isClicked}/>
     </div>
   )

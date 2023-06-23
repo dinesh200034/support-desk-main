@@ -7,8 +7,8 @@ function NavBar({white,black,onClickFunc}) {
         'text-black':black
     });
   return (
-    <nav className="flex items-center justify-between shadow shadow-gray-500 h-14 py-3 px-4 ">
-        <AiOutlineMenu className={classes} onClick={onClickFunc}/>
+    <nav className="z-10 bg-white fixed flex items-center justify-end shadow shadow-gray-500 h-[8%] w-full py-3 px-4 ">
+        {/* <AiOutlineMenu className={classes} onClick={onClickFunc}/> */}
         <img className='w-52' src={Logo} alt="Logo"/>
     </nav>
   )

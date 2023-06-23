@@ -3,9 +3,10 @@ import { Link ,useLocation } from 'react-router-dom';
 import { BsFillBookFill,BsBookmarksFill } from "react-icons/bs";
 import { BiAlarmOff,BiLogOut } from "react-icons/bi";
 import { MdSubject,MdSettings } from "react-icons/md";
+import { TiThMenu } from "react-icons/ti";
 import { CgProfile } from "react-icons/cg";
 import {useState} from 'react';
-function SideBar({subjects,markingSchemes,answerPapers,mcq,clicked}) {
+function SideBar({subjects,markingSchemes,answerPapers,mcq,clicked,onClickFunc}) {
   const currentURL = window.location.href;
   const location = useLocation();
   const pathName = location.pathname.split('/').filter((path) => path !== '')
@@ -15,12 +16,13 @@ function SideBar({subjects,markingSchemes,answerPapers,mcq,clicked}) {
   const bottomclasses = classnames('flex flex-col items-center justify-center cursor-pointer py-4');
   const backGroundColor = classnames('bg-white bg-opacity-30 rounded rounded-lg');
   let navbarclasses;
-
+  // console.log("clicked::"+clicked)
   if(clicked==="outer"){
-    navbarclasses = classnames('px-2 text-white font-bold text-center flex flex-col justify-between sidebar w-16 bg-[#4457FF] outer pt-1')
+    navbarclasses = classnames('z-20 fixed px-2 text-white font-bold text-center flex flex-col justify-between sidebar w-16 bg-[#4457FF] outer pt-1')
   }else if(clicked==="inner"){
-    navbarclasses = classnames('px-2 text-white font-bold text-center flex flex-col justify-between sidebar w-64 bg-[#4457FF] inner pt-1 max-sm:w-14')
+    navbarclasses = classnames('z-20 fixed px-2 text-white font-bold text-center flex flex-col justify-between sidebar w-64 bg-[#4457FF] inner pt-1 max-sm:w-14')
   }
+
 
   //When logout button clicked
   const handleSubmit = () => {
@@ -28,9 +30,11 @@ function SideBar({subjects,markingSchemes,answerPapers,mcq,clicked}) {
     window.location.href = '/';
   }
 
+
   return (
     <div className={navbarclasses}>
       <div className="text-left">
+        <TiThMenu className='-ml-2 text-6xl flex flex-col cursor-pointer py-3' onClick={onClickFunc}/>
         {subjects && <div className={`${classes} ${clicked === "outer" ? 'items-center': ""} ${pathName[0] === "subjects" ? backGroundColor : ""}`}><Link to="/subjects" className='flex items-center'><div className='ml-1 block text-3xl pr-1'><MdSubject/></div>{clicked==="inner" ? <div className='ml-1 max-sm:hidden'>Subjects</div> : ""}</Link></div>}
         {markingSchemes && <div className={`${classes} ${clicked === 'outer' ? 'items-center': ""} ${pathName[0] === "markingschemes" ? backGroundColor : ""}`}><Link to="/markingschemes" className='flex items-center'><div className='ml-1 block text-3xl pr-1'><BsFillBookFill/></div>{clicked==="inner" ? <div className='ml-1 max-sm:hidden'>Marking Schemes</div> : ""}</Link></div>}
         {answerPapers && <div className={`${classes} ${clicked === 'outer' ? 'items-center': ""} ${pathName[0] === "answersheets" ? backGroundColor : ""}`}><Link to="/answersheets" className='flex items-center'><div className='ml-1 block text-3xl pr-1'><BiAlarmOff/></div>{clicked==="inner" ?  <div className='ml-1 max-sm:hidden'>Answer Papers</div> : ""}</Link></div>}

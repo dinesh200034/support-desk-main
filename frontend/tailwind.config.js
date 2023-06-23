@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       height: {
+        'custom-8%': '8%',
         'custom-95%': '95%',
         'custom-90%': '90%',
         'custom-94%': '94%',

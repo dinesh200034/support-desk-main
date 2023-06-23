@@ -11,6 +11,11 @@ const answerSchema = mongoose.Schema(
         required: true,
         ref: 'QuestionAnswer',
     },
+    subjectId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Subject',
+    },
     text:{
         type:String,
     },

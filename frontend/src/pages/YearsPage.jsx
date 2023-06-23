@@ -43,8 +43,8 @@ function YearsPage() {
 
   return (
     <div>
-      <NavBar black onClickFunc={handleClick}/>
-      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked}/>
+      <NavBar black />
+      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked} onClickFunc={handleClick}/>
       <Years clicked={isClicked} data={years}/>
     </div>
   )

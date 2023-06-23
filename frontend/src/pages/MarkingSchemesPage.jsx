@@ -35,15 +35,17 @@ function MarkingSchemesPage() {
   const handleClick = () => {
     if(isClicked==="outer"){
     setClick("inner")
+    // console.log(isClicked)
     }else{
     setClick("outer")
+    // console.log(isClicked)
     }
   }
 
   return (
     <div>
-      <NavBar black onClickFunc={handleClick}/>
-      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked}/>
+      <NavBar />
+      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked} onClickFunc={handleClick}/>
       <MarkingSchemes clicked={isClicked} data="hello"/>
       
     </div>
