@@ -2,12 +2,13 @@ import { Route, Routes } from 'react-router-dom';
 import EssayPage from './Pages/EssayPage';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
-import Dashboard from './Pages/Dashboard';
+import AdminDashboard from './Pages/AdminDashboard';
 import SubjectsPage from './Pages/SubjectsPage';
 import SubjectPage from './Pages/SubjectPage';
 import YearsPage from './Pages/YearsPage';
 import MarkingSchemesPage from './Pages/MarkingSchemesPage';
 import AnswerSheetsPage from './Pages/AnswerSheetsPage';
+import TopBar from './Components/TopBar';
 import './Components/TopBar.css';
 
 function App(){
@@ -18,7 +19,7 @@ function App(){
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/essayPage" element={<EssayPage />} />
 
         <Route path="/subjects" element={<SubjectsPage />} />
@@ -36,7 +37,7 @@ function App(){
         <Route path="/answersheets/:year/:subjectId" element={<AnswerSheetsPage />} />
 
         
-        <Route path="/mcq" element={<Dashboard />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </div>
   );

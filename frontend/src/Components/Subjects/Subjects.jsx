@@ -15,7 +15,7 @@ function Subjects({clicked,data}) {
   return (
     <div className={`${classes} ${clicked === 'outer' ? 'ml-16 outer' : 'ml-64 inner'}`}>
       <div className='flex justify-center items-center sidebar'>
-          <div className='h-custom-95% w-11/12'>
+          <div className='mt-[8%] h-[85%] w-11/12'>
             <div className='flex flex-row items-center justify-between px-10 h-10 mb-4'>
                 <p className='bg-black/20 p-2 rounded rounded-lg'>Acdemic year</p>
                 <p className='bg-black/20 p-2 rounded rounded-lg'>Grade</p>

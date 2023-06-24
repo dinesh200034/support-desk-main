@@ -38,9 +38,17 @@ function Login(){
             const response = await axios.post('http://localhost:5000/api/users/login',formData);
             // console.log(response.data);
             localStorage.setItem('token', JSON.stringify(response.data));
-            // const allItems=JSON.parse(localStorage.getItem('token'));
-            // console.log(allItems['_id']);
-            navigate('/subjects');
+            const allItems=JSON.parse(localStorage.getItem('token'));
+            // console.log(allItems['userType']);
+            if(allItems['userType']==="student"){
+                navigate('/subjects');
+            }else if(allItems['userType']==="teacher"){
+                navigate('/subjects');
+            }else if(allItems['userType']==="admin"){
+                navigate('/admin/dashboard');
+            }
+
+            // navigate('/subjects');
         }catch(error){
             // console.log("error:"+error.response.data.message);
             if(error.response && error.response.status >=400 && error.response.status <500){

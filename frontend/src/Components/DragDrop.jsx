@@ -34,9 +34,30 @@ function DragDrop({children,closeFunc}) {
 
   const handleSubmit = (e) =>{
     e.preventDefault();
+    if(!files?.length) return
+    const formData = new FormData()
+    files.forEach(file => formData.append('file', file))
+    console.log(formData)
+    // const formEntries = formData.entries();
+
+    // // Iterate over the entries
+    // for (let entry of formEntries) {
+    //   const [name, value] = entry;
+
+    //   // Check if the value is a File object
+    //   if (value instanceof File) {
+    //     console.log('File name:', value.name);
+    //     console.log('File type:', value.type);
+    //     console.log('File size:', value.size);
+    //     // You can access other properties of the File object as needed
+    //   } else {
+    //     console.log('Field name:', name);
+    //     console.log('Field value:', value);
+    //   }
+    // }
   }
 
-
+  console.log(files);
   return ReactDOM.createPortal(
     <div >
       <div className='z-30 fixed inset-0 bg-gray-300 opacity-80' onClick={closeFunc}></div>
@@ -79,6 +100,7 @@ function DragDrop({children,closeFunc}) {
                 <li key={file.name}>
                   <div className="flex flex-row justify-between mb-2">
                       <p className=" text-left text-lg font-semibold text-#2e1065 md:text-lg dark:text-#2e1065">{file.name}&nbsp;</p>
+                      {/* <p className=" text-left text-lg font-semibold text-#2e1065 md:text-lg dark:text-#2e1065">{file.path}&nbsp;</p> */}
                       <button type="button" className='ml-5 text-white text-center bg-red-400 rounded-xl p-1 hover:bg-red-500' onClick={()=>removeFile(file.name)}><AiOutlineClose/></button>
                   </div>
                 </li>

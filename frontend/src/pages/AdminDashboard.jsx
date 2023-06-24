@@ -3,7 +3,7 @@ import NavBar from '../Components/NavBar'
 import SideBar from '../Components/SideBar'
 import Subjects from '../Components/Subjects/Subjects'
 import {useState} from 'react'
-function Dashboard() {
+function AdminDashboard() {
 
   const [isClicked,setClick] = useState("outer")
 
@@ -20,10 +20,10 @@ function Dashboard() {
   return (
     <div>
       <NavBar />
-      <SideBar mcq subjects markingSchemes answerPapers clicked={isClicked} onClickFunc={handleClick}/>
-      <Subjects clicked={isClicked}/>
+      <SideBar dashboard subjects clicked={isClicked} onClickFunc={handleClick}/>
+      {/* <Subjects clicked={isClicked}/> */}
     </div>
   )
 }
 
-export default Dashboard
+export default AdminDashboard
